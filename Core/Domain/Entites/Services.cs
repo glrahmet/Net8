@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class Services
-    {
-        public int ServiceId { get; set; }
+    public class Services : BaseEntity
+    { 
         public string Title { get; set; }
         public string Description { get; set; }
         public string IconUrl { get; set; }

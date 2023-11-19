@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class Contract
-    {
-        public int ContractId { get; set; }
+    public class Contract : BaseEntity
+    { 
         public string ContractName { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }

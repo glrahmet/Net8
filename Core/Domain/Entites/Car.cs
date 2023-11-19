@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class Car
-    {
-        public int CarId { get; set; }
-        public int BrandId { get; set; }
-
+    public class Car : BaseEntity
+    { 
+        public int BrandId { get; set; } 
         public Brand Brand { get; set; }
         public string Model { get; set; }
         public string CoverImageModel { get; set; }

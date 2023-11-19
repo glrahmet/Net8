@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class Testimonial
-    {
-        public int TestimonialId { get; set; }
+    public class Testimonial : BaseEntity
+    { 
         public string TestimonialName { get; set; }
         public string Title { get; set; }
         public string Comment { get; set; }

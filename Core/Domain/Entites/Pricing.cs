@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class Pricing
-    {
-        public int PricingId { get; set; }
+    public class Pricing : BaseEntity
+    { 
         public string PricingName { get; set; }
         public List<CarPricing> CarPricings { get; set; }
     }

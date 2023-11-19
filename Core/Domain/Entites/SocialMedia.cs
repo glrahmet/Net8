@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class SocialMedia
-    {
-        public int SecialMediaId {get; set;}
+    public class SocialMedia : BaseEntity
+    { 
         public string SocialMediaName  {get; set;}
         public string SocialMediaIconUrl {get; set;}
     }
