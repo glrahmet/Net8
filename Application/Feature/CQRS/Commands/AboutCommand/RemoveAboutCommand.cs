@@ -1,0 +1,17 @@
+﻿using Application.Feature.BaseModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Feature.CQRS.Commands.AboutCommand
+{
+    public class RemoveAboutCommand : BaseClass
+    {
+        public RemoveAboutCommand(int id)
+        {
+            this.Id = id;
+        }
+    }
+}
