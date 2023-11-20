@@ -22,19 +22,18 @@ namespace Application.Feature.CQRS.Handlers.AboutHandlers
         public async Task<GetAboutByIdQueryResult> Handle(GetAboutByIdQuery getAboutByIdQuery)
         {
             var values = await _repository.GetByIdAsync(getAboutByIdQuery.Id);
-            return new GetAboutByIdQueryResult
+            if (values != null)
             {
-
-                Id = values.Id,
-                Description = values.Description,
-                ImageUrl = values.ImageUrl,
-                Title = values.Title
-            };
-        }
-
-        public Task Handle(int id)
-        {
-            throw new NotImplementedException();
+                return new GetAboutByIdQueryResult
+                {
+                    Id = values.Id,
+                    Description = values.Description,
+                    ImageUrl = values.ImageUrl,
+                    Title = values.Title
+                };
+            }
+            else
+                return new GetAboutByIdQueryResult();
         }
     }
 }

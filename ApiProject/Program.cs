@@ -14,6 +14,8 @@ builder.Services.AddScoped<GetAboutByIdCommandHandler>();
 builder.Services.AddScoped<GetAboutQueryCommandHandler>();
 builder.Services.AddScoped<UpdateAboutCommandHandler>();
 builder.Services.AddScoped<RemoveAboutCommandHandler>();
+builder.Services.AddScoped<CreateAboutCommandHandler>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -12,7 +12,7 @@ namespace Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=glrahmt\\SQLEXPRESS;UId=sa;Pwd=1234;Database=CarBookDb;Integrated Security=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=localhost;UId=sa;Pwd=1234;Database=CarBookDb;Integrated Security=true;TrustServerCertificate=true;");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<About> Abouts { get; set; }
