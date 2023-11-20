@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Feature.CQRS.Handlers.CarHandlers
 {
-    internal class GetCarByIdCommandHandler
+    public class GetCarByIdCommandHandler
     {
         private readonly IRepository<Car> _repository;
 

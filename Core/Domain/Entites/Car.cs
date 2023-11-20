@@ -10,7 +10,7 @@ namespace Domain.Entites
     public class Car : BaseEntity
     { 
         public int BrandId { get; set; } 
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
         public string Model { get; set; }
         public string CoverImageModel { get; set; }
         public int Km { get; set; }
@@ -19,8 +19,8 @@ namespace Domain.Entites
         public byte Lungage { get; set; }
         public FuelEnum Fuel { get; set; }
         public string BigImageUrl { get; set; }
-        public List<CarFeature> CarFeatures { get; set; }
-        public List<CarDescription> CarDescriptions { get; set; }
-        public List<CarPricing> CarPricings { get; set; }
+        public virtual List<CarFeature> CarFeatures { get; set; }
+        public virtual List<CarDescription> CarDescriptions { get; set; }
+        public virtual  List<CarPricing> CarPricings { get; set; }
     }
 }
