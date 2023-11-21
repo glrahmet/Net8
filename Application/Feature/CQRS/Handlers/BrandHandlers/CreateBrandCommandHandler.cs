@@ -20,7 +20,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
 
         public async Task Handle(CreateBrandCommad command)
         {
-            await _repository.CreateAsync(new Brand
+            await _repository.AddAsync(new Brand
             {
                 BrandName = command.BrandName,
                 Cars = command.Cars

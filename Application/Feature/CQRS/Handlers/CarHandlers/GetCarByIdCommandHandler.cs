@@ -22,7 +22,7 @@ namespace Application.Feature.CQRS.Handlers.CarHandlers
 
         public async Task<GetCarByIdQueryResult> Handle(GetCarByIdQuery getCarByIdQuery)
         {
-            var values = await _repository.GetByIdAsync(getCarByIdQuery.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == getCarByIdQuery.Id);
 
             if (values != null)
             {

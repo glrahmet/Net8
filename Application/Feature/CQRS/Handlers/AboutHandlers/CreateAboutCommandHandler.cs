@@ -20,7 +20,7 @@ namespace Application.Feature.CQRS.Handlers.AboutHandlers
 
         public async Task Handle(CreateAboutCommand createAboutCommand)
         {
-            await _repository.CreateAsync(new About
+            await _repository.AddAsync(new About
             {
                 Title = createAboutCommand.Title,
                 Description = createAboutCommand.Description,

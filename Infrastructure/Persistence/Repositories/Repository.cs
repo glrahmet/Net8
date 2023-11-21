@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.Entites;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -11,45 +12,48 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly Net8Context _context;
         public Repository(Net8Context context)
         {
             _context = context;
         }
-        public async Task CreateAsync(T entity)
+
+        public async Task AddAsync(TEntity entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<TEntity>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(T entity)
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            _context.Set<T>().Remove(entity);
+            await _context.Set<TEntity>().AddRangeAsync(entities);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _context.Set<T>().ToListAsync();
+            return _context.Set<TEntity>().Where(predicate);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<TEntity>().ToListAsync();
         }
-        public async Task Update(T entity)
+        public async Task<IEnumerable<TEntity>> GetAllByFilterAsync(Expression<Func<TEntity, bool>> filter = null, params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes)
         {
-            _context.Set<T>().Update(entity);
-            await _context.SaveChangesAsync();
+            var query = _context.Set<TEntity>().AsQueryable();
+            foreach (var include in includes)
+            {
+                query = include(query);
+            }
+
+            return filter == null ? await query.ToListAsync() : await query.Where(filter).ToListAsync();
         }
-
-
-        public async Task<T> GetFirstByFilterAsync(Expression<Func<T, bool>> filter = null, params Func<IQueryable<T>, IQueryable<T>>[] includes)
+        public async Task<TEntity> GetFirstByFilterAsync(Expression<Func<TEntity, bool>> filter = null, params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes)
         {
-
-            var query = _context.Set<T>().AsQueryable();
+            var query = _context.Set<TEntity>().AsQueryable();
             foreach (var include in includes)
             {
                 query = include(query);
@@ -58,29 +62,35 @@ namespace Persistence.Repositories
             return filter == null ? await query.FirstOrDefaultAsync() : await query.Where(filter).FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllByFilterAsync(Expression<Func<T, bool>> filter = null, params Func<IQueryable<T>, IQueryable<T>>[] includes)
+        public async Task<TEntity> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        //public async Task<IEnumerable<T>> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>,   string includeProperties = "")
-        //{
-        //    IQueryable<T> Query = _context.Set<T>();
+        public void Remove(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+             _context.SaveChanges();
+        }
 
-        //    if (filter != null)
-        //    {
-        //        Query = Query.Where(filter);
-        //    }
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _context.Set<TEntity>().RemoveRange(entities);
+            _context.SaveChanges();
+        }
 
-        //    if (!string.IsNullOrEmpty(includeProperties))
-        //    {
-        //        foreach (string IncludeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-        //        {
-        //            Query = Query.Include(IncludeProperty);
-        //        }
-        //    }
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
+            _context.SaveChanges();
+        }
 
-        //    return Query;
-        //}
+        public void UpdateRange(IEnumerable<TEntity> entity)
+        {
+            _context.Set<TEntity>().UpdateRange(entity);
+            _context.SaveChanges();
+        }
+
+
     }
 }

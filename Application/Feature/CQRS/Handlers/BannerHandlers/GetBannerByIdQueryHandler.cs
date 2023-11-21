@@ -23,7 +23,7 @@ namespace Application.Feature.CQRS.Handlers.BannerHandlers
 
         public async Task<GetBannerByIdQueryResult> Handle(GetBannerByIdQuery getBannerByIdQuery)
         {
-            var values = await _repository.GetByIdAsync(getBannerByIdQuery.Id);
+            var values = await _repository.GetFirstByFilterAsync(p=>p.Id==getBannerByIdQuery.Id);
             if (values != null)
             {
                 return new GetBannerByIdQueryResult

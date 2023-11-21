@@ -20,10 +20,10 @@ namespace Application.Feature.CQRS.Handlers.CarHandlers
 
         public async Task Handle(RemoveCarCommand removeCarCommand)
         {
-            var values = await _repository.GetByIdAsync(removeCarCommand.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == removeCarCommand.Id);
             if (values != null)
             {
-                await _repository.Delete(values); 
+                _repository.Remove(values);
             }
         }
     }

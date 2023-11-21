@@ -21,13 +21,13 @@ namespace Application.Feature.CQRS.Handlers.AboutHandlers
 
         public async Task Handle(UpdateAboutCommand updateAboutCommand)
         {
-            var value = await _repository.GetByIdAsync(updateAboutCommand.Id);
+            var value = await _repository.GetFirstByFilterAsync(p => p.Id == updateAboutCommand.Id);
             if (value != null)
             {
                 value.Description = updateAboutCommand.Description;
                 value.ImageUrl = updateAboutCommand.ImageUrl;
                 value.Title = updateAboutCommand.Title;
-                await _repository.Update(value);
+                _repository.Update(value);
             }
         }
     }

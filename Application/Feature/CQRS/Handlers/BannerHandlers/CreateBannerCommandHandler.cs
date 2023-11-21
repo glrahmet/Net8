@@ -21,7 +21,7 @@ namespace Application.Feature.CQRS.Handlers.BannerHandlers
 
         public async Task Handle(CreateBannerCommand createBannerCommand)
         {
-            await _repository.CreateAsync(new Banner
+            await _repository.AddAsync(new Banner
             {
                 Title = createBannerCommand.Title,
                 Description = createBannerCommand.Description,

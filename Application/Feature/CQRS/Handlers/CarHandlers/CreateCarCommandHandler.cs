@@ -20,7 +20,7 @@ namespace Application.Feature.CQRS.Handlers.CarHandlers
 
         public async Task Handle(CreateCarCommand createCarCommand)
         {
-            await _repository.CreateAsync(new Car
+            await _repository.AddAsync(new Car
             {
                 BigImageUrl = createCarCommand.BigImageUrl,
                 Brand = createCarCommand.Brand,

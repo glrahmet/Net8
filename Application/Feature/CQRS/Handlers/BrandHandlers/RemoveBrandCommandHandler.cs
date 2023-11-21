@@ -20,10 +20,10 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
 
         public async Task Handle(RemoveBannerCommand removeBannerCommand)
         {
-            var values = await _repository.GetByIdAsync(removeBannerCommand.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == removeBannerCommand.Id);
             if (values != null)
             {
-                await _repository.Delete(values);
+                _repository.Remove(values);
             }
         }
     }

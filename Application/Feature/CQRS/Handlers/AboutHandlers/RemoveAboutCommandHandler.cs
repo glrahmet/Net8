@@ -20,11 +20,11 @@ namespace Application.Feature.CQRS.Handlers.AboutHandlers
 
         public async Task Handle(RemoveAboutCommand removeAboutCommand)
         {
-            var value= await _repository.GetByIdAsync(removeAboutCommand.Id);
+            var value = await _repository.GetFirstByFilterAsync(p => p.Id == removeAboutCommand.Id);
             if (value != null)
             {
-                await _repository.Delete(value);
-            }   
+                _repository.Remove(value);
+            }
         }
     }
 }

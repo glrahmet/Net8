@@ -20,13 +20,13 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
 
         public async Task Handle(UpdateBrandCommand updateBrandCommand)
         {
-            var values = await _repository.GetByIdAsync(updateBrandCommand.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == updateBrandCommand.Id);
 
             if (values != null)
             {
                 values.BrandName = updateBrandCommand.BrandName;
                 values.Cars = updateBrandCommand.Cars;
-                await _repository.Update(values);
+                _repository.Update(values);
             }
         }
     }

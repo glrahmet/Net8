@@ -20,25 +20,25 @@ namespace Application.Feature.CQRS.Handlers.CarHandlers
 
         public async Task Handle(UpdateCarCommand updateCarCommand)
         {
-            var values = await _repository.GetByIdAsync(updateCarCommand.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == updateCarCommand.Id);
             if (values != null)
             {
                 values.Fuel = updateCarCommand.Fuel;
                 values.CarFeatures = updateCarCommand.CarFeatures;
-                values.Brand = updateCarCommand.Brand;  
-                values.BrandId = updateCarCommand.BrandId;  
-                values.TransMission= updateCarCommand.TransMission; 
+                values.Brand = updateCarCommand.Brand;
+                values.BrandId = updateCarCommand.BrandId;
+                values.TransMission = updateCarCommand.TransMission;
                 values.CarPricings = updateCarCommand.CarPricings;
                 values.BigImageUrl = updateCarCommand.BigImageUrl;
                 values.CarDescriptions = updateCarCommand.CarDescriptions;
                 values.CoverImageModel = updateCarCommand.CoverImageModel;
-                values.Km=  updateCarCommand.Km;
-                values.Lungage= updateCarCommand.Lungage;
-                values.Model= updateCarCommand.Model;
-                values.Seat=updateCarCommand.Seat;
-                await _repository.Update(values);
+                values.Km = updateCarCommand.Km;
+                values.Lungage = updateCarCommand.Lungage;
+                values.Model = updateCarCommand.Model;
+                values.Seat = updateCarCommand.Seat;
+                _repository.Update(values);
             }
-             
+
         }
     }
 }

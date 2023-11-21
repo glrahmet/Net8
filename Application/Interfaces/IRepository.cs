@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        Task<List<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task CreateAsync(T entity);
-        Task Update(T entity);
-        Task Delete(T entity);
-
-      //  Task<IQueryable<T> Include(Func<IQueryable<T>, IQueryable<T, object>> include);
-
-      //  Task<IEnumerable<T>> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
-        //Task<T> GetFirstByFilterAsync(Expression<Func<T, bool>> filter = null, params Func<IQueryable<T>, IQueryable<T>>[] includes);
+        Task<TEntity> GetAsync(int id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetAllByFilterAsync(Expression<Func<TEntity, bool>> filter = null, params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes);
+        Task<TEntity> GetFirstByFilterAsync(Expression<Func<TEntity, bool>> filter = null, params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        Task AddAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
+        void Update(TEntity entity);
+        void UpdateRange(IEnumerable<TEntity> entity);
     }
 }

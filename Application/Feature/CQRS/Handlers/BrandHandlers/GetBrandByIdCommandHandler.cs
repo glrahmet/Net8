@@ -23,7 +23,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
 
         public async Task<GetBrandByIdQueryResult> Handle(GetBrandByIdQuery getBrandByIdQuery)
         {
-            var values = await _repository.GetByIdAsync(getBrandByIdQuery.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == getBrandByIdQuery.Id);
             if (values != null)
             {
                 return new GetBrandByIdQueryResult
@@ -33,7 +33,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
                     Id = values.Id,
                 };
             }
-            else 
+            else
                 return new GetBrandByIdQueryResult { };
         }
     }

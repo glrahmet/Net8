@@ -21,7 +21,7 @@ namespace Application.Feature.CQRS.Handlers.AboutHandlers
 
         public async Task<GetAboutByIdQueryResult> Handle(GetAboutByIdQuery getAboutByIdQuery)
         {
-            var values = await _repository.GetByIdAsync(getAboutByIdQuery.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == getAboutByIdQuery.Id);
             if (values != null)
             {
                 return new GetAboutByIdQueryResult

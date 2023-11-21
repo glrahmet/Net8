@@ -21,7 +21,7 @@ namespace Application.Feature.CQRS.Handlers.BannerHandlers
 
         public async Task Handle(UpdateBannerCommand updateAboutCommand)
         {
-            var values = await _repository.GetByIdAsync(updateAboutCommand.Id);
+            var values = await _repository.GetFirstByFilterAsync(p => p.Id == updateAboutCommand.Id);
 
             if (values != null)
             {
@@ -30,7 +30,7 @@ namespace Application.Feature.CQRS.Handlers.BannerHandlers
                 values.Description = updateAboutCommand.Description;
                 values.VideoDescription = updateAboutCommand.VideoDescription;
 
-                await _repository.Update(values);
+                _repository.Update(values);
             }
         }
     }
