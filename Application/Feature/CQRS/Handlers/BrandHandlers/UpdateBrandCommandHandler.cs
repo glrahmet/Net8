@@ -25,7 +25,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
             if (values != null)
             {
                 values.BrandName = updateBrandCommand.BrandName;
-                values.Cars = updateBrandCommand.Cars;
+               // values.Cars = updateBrandCommand.Cars;
                 _repository.Update(values);
             }
         }

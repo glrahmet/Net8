@@ -27,7 +27,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
             {
                 Id = x.Id,
                 BrandName = x.BrandName,
-                Cars = x.Cars
+               // Cars = x.Cars
 
             }).ToList();
         }

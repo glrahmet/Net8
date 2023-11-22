@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiProject.Controllers
 {
-    
+    [ApiController]
+    [Route("api/[controller]/[action]")]
     public class CarsController : ControllerBase
     {
         private readonly CreateCarCommandHandler _createCarCommandHandler;
@@ -66,7 +67,7 @@ namespace ApiProject.Controllers
             return Ok("Bilgi Güncellendi");
         }
         [HttpGet]
-        public async Task<IActionResult> GetCarWithBrand(int id)
+        public async Task<IActionResult> GetCarWithBrand()
         {
             var values = await _getCarWithBrandQueryHandler.Handle();
             return Ok(values);

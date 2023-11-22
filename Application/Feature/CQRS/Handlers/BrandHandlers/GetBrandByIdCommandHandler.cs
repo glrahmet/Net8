@@ -29,7 +29,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
                 return new GetBrandByIdQueryResult
                 {
                     BrandName = values.BrandName,
-                    Cars = values.Cars,
+                   //Cars = values.Cars,
                     Id = values.Id,
                 };
             }

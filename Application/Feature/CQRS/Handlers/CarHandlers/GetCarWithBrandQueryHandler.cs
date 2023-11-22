@@ -1,6 +1,7 @@
 ﻿using Application.Feature.CQRS.Results.CarResults;
 using Application.Interfaces;
 using Domain.Entites;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace Application.Feature.CQRS.Handlers.CarHandlers
         {
 
 
-            var values = await _repository.GetAllAsync();          
-            
+            var values = await _repository.GetAllByFilterAsync(null, o => o.Include("Brand"));
+
 
             if (values != null)
             {

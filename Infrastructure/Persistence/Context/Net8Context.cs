@@ -24,7 +24,7 @@ namespace Persistence.Context
         public DbSet<CarPricing> CarPricings { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Feature> Features { get; set; }
+        public DbSet<Features> Featuresies { get; set; }
         public DbSet<FooterAddres> FooterAddres { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Pricing> Pricing { get; set; }

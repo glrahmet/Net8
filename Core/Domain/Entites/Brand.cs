@@ -9,6 +9,6 @@ namespace Domain.Entites
     public class Brand : BaseEntity
     { 
         public string BrandName { get; set; }
-        public List<Car> Cars { get; set; }
+       // public List<Car> Cars { get; set; }
     }
 }

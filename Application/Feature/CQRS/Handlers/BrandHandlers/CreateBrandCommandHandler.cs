@@ -23,7 +23,7 @@ namespace Application.Feature.CQRS.Handlers.BrandHandlers
             await _repository.AddAsync(new Brand
             {
                 BrandName = command.BrandName,
-                Cars = command.Cars
+               // Cars = command.Cars
             });
         }
     }
